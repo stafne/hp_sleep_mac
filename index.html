@@ -257,18 +257,18 @@
         <div class="content">
             <div class="install-section">
                 <h2>📥 Quick Install</h2>
-                <p>Click the button below to download the installer script:</p>
+                <p>Click the button below to download HP Py Sleep:</p>
                 
-                <button class="install-button" onclick="downloadInstaller()">
-                    📱 Download Installer
+                <button class="install-button" onclick="downloadDMG()">
+                    📱 Download HP Py Sleep
                 </button>
                 
                 <div class="one-liner">
-                    <code id="install-command">curl -s https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh | bash</code>
+                    <code id="install-command">curl -L https://github.com/stafne/hp_sleep_mac/releases/latest/download/hp_py_sleep_mac.dmg</code>
                     <button class="copy-button" onclick="copyCommand()">Copy</button>
                 </div>
                 
-                <p><small>Or copy the command above and run it in Terminal</small></p>
+                <p><small>Or copy the command above to download via Terminal</small></p>
             </div>
             
             <div class="system-requirements">
@@ -313,11 +313,11 @@
             <div class="instructions">
                 <h3>📋 How to Install</h3>
                 <ol>
-                    <li>Click "Download Installer" above to download the script</li>
-                    <li>Open Terminal (Press Cmd+Space, type "Terminal", press Enter)</li>
-                    <li>Navigate to Downloads: <code>cd ~/Downloads</code></li>
-                    <li>Make executable: <code>chmod +x install_hp_py_sleep.sh</code></li>
-                    <li>Run installer: <code>./install_hp_py_sleep.sh</code></li>
+                    <li>Click "Download HP Py Sleep" above to download the DMG file</li>
+                    <li>Double-click the downloaded DMG file to mount it</li>
+                    <li>Drag the HP Py Sleep app to your Applications folder</li>
+                    <li>Eject the DMG when installation is complete</li>
+                    <li>Launch HP Py Sleep from your Applications folder</li>
                 </ol>
             </div>
             
@@ -342,41 +342,28 @@
     </div>
     
     <script>
-        function downloadInstaller() {
-            // Fetch the installer script and create a proper download
-            fetch('https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh')
-                .then(response => response.text())
-                .then(data => {
-                    // Create a blob with the script content
-                    const blob = new Blob([data], { type: 'text/plain' });
-                    const url = window.URL.createObjectURL(blob);
-                    
-                    // Create a download link
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = 'install_hp_py_sleep.sh';
-                    link.style.display = 'none';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    
-                    // Clean up the blob URL
-                    window.URL.revokeObjectURL(url);
-                    
-                    // Update button to show success
-                    const button = document.querySelector('.install-button');
-                    const originalText = button.textContent;
-                    button.textContent = '✅ Downloaded!';
-                    button.style.background = '#28a745';
-                    setTimeout(() => {
-                        button.textContent = originalText;
-                        button.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
-                    }, 3000);
-                })
-                .catch(error => {
-                    console.error('Download failed:', error);
-                    alert('Download failed. Please try again or use the command below.');
-                });
+        function downloadDMG() {
+            // Download the latest DMG file from GitHub releases
+            const downloadUrl = 'https://github.com/stafne/hp_sleep_mac/releases/latest/download/hp_py_sleep_mac.dmg';
+            
+            // Create a download link
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = 'hp_py_sleep_mac.dmg';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Update button to show success
+            const button = document.querySelector('.install-button');
+            const originalText = button.textContent;
+            button.textContent = '✅ Downloaded!';
+            button.style.background = '#28a745';
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
+            }, 3000);
         }
         
         function copyCommand() {

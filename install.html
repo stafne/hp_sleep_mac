@@ -164,23 +164,23 @@
         <h1>🚀 HP Py Sleep</h1>
         <p class="subtitle">Download & Install the Latest Version</p>
         
-        <a href="javascript:void(0)" class="install-button" onclick="downloadInstaller()">
-            📱 Download Installer
+        <a href="javascript:void(0)" class="install-button" onclick="downloadDMG()">
+            📱 Download HP Py Sleep
         </a>
         
         <div class="command-box">
-            <div>curl -s https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh | bash</div>
+            <div>curl -L https://github.com/stafne/hp_sleep_mac/releases/latest/download/hp_py_sleep_mac.dmg</div>
             <button class="copy-button" onclick="copyCommand()">Copy Command</button>
         </div>
         
         <div class="instructions">
             <h3>📋 Installation Steps</h3>
             <ol>
-                <li>Click "Download Installer" above to download the script</li>
-                <li>Open Terminal (Press Cmd+Space, type "Terminal", press Enter)</li>
-                <li>Navigate to Downloads: <code>cd ~/Downloads</code></li>
-                <li>Make executable: <code>chmod +x install_hp_py_sleep_simple.sh</code></li>
-                <li>Run installer: <code>./install_hp_py_sleep_simple.sh</code></li>
+                <li>Click "Download HP Py Sleep" above to download the DMG file</li>
+                <li>Double-click the downloaded DMG file to mount it</li>
+                <li>Drag the HP Py Sleep app to your Applications folder</li>
+                <li>Eject the DMG when installation is complete</li>
+                <li>Launch HP Py Sleep from your Applications folder</li>
             </ol>
         </div>
         
@@ -203,11 +203,11 @@
     </div>
     
     <script>
-        function downloadInstaller() {
-            // Create a download link for the installer script
+        function downloadDMG() {
+            // Create a download link for the DMG file
             const link = document.createElement('a');
-            link.href = 'https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh';
-            link.download = 'install_hp_py_sleep_simple.sh';
+            link.href = 'https://github.com/stafne/hp_sleep_mac/releases/latest/download/hp_py_sleep_mac.dmg';
+            link.download = 'hp_py_sleep_mac.dmg';
             link.style.display = 'none';
             document.body.appendChild(link);
             link.click();
@@ -225,7 +225,7 @@
         }
         
         function copyCommand() {
-            const command = 'curl -s https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh | bash';
+            const command = 'curl -L https://github.com/stafne/hp_sleep_mac/releases/latest/download/hp_py_sleep_mac.dmg';
             navigator.clipboard.writeText(command).then(() => {
                 const button = event.target;
                 const originalText = button.textContent;
