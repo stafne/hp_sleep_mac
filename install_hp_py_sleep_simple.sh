@@ -292,7 +292,7 @@ if [[ "$response" =~ ^[Yy]$ ]]; then
     echo -e "${BLUE}🚀 Launching HP Py Sleep...${NC}"
     open "$APP_DESTINATION"
     echo ""
-    echo -e "${YELLOW}If you see a security warning, right-click the app and select 'Open'.${NC}"
+    echo -e "${YELLOW}If you see a security warning, right-click the app and select \"Open\".${NC}"
 fi
 
 echo ""
