@@ -257,11 +257,11 @@
         <div class="content">
             <div class="install-section">
                 <h2>📥 Quick Install</h2>
-                <p>Click the button below to download and install HP Py Sleep automatically:</p>
+                <p>Click the button below to download the installer script:</p>
                 
-                <button class="install-button" onclick="runInstaller()">
-                    📱 Install HP Py Sleep
-                </button>
+                <a href="https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh" class="install-button" download="install_hp_py_sleep.sh">
+                    📱 Download Installer
+                </a>
                 
                 <div class="one-liner">
                     <code id="install-command">curl -s https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh | bash</code>
@@ -311,13 +311,13 @@
             </div>
             
             <div class="instructions">
-                <h3>📋 What Happens When You Install</h3>
+                <h3>📋 How to Install</h3>
                 <ol>
-                    <li>Downloads the latest HP Py Sleep release from GitHub</li>
-                    <li>Extracts the application to a temporary location</li>
-                    <li>Copies the app to your Applications folder</li>
-                    <li>Provides instructions for launching (security bypass)</li>
-                    <li>Optionally launches the app immediately</li>
+                    <li>Click "Download Installer" above to download the script</li>
+                    <li>Open Terminal (Press Cmd+Space, type "Terminal", press Enter)</li>
+                    <li>Navigate to Downloads: <code>cd ~/Downloads</code></li>
+                    <li>Make executable: <code>chmod +x install_hp_py_sleep.sh</code></li>
+                    <li>Run installer: <code>./install_hp_py_sleep.sh</code></li>
                 </ol>
             </div>
             
@@ -342,57 +342,16 @@
     </div>
     
     <script>
-        function runInstaller() {
-            // Create a temporary script element to run the installer
-            const script = document.createElement('script');
-            script.textContent = `
-                // This will be executed in the browser context
-                // We'll redirect to a data URL that contains the installer
-                const installerUrl = 'data:text/plain;base64,' + btoa(\`
-#!/bin/bash
-# HP Py Sleep Installer - Downloaded from GitHub Pages
-# This script will download and install the latest HP Py Sleep release
-
-echo "🚀 HP Py Sleep Installer"
-echo "========================="
-echo ""
-echo "This installer will download and install HP Py Sleep to your Applications folder."
-echo ""
-
-# Check if we're on macOS
-if [[ "\$OSTYPE" != "darwin"* ]]; then
-    echo "❌ This installer is designed for macOS only."
-    exit 1
-fi
-
-echo "📱 Detected macOS system"
-echo ""
-
-# Download and run the actual installer
-echo "📥 Downloading installer script..."
-if curl -s https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh | bash; then
-    echo ""
-    echo "✅ Installation completed successfully!"
-    echo "HP Py Sleep is now available in your Applications folder."
-else
-    echo ""
-    echo "❌ Installation failed. Please try again or contact support."
-fi
-\`);
-                
-                // Create a download link
-                const link = document.createElement('a');
-                link.href = installerUrl;
-                link.download = 'install_hp_py_sleep.sh';
-                link.style.display = 'none';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                
-                alert('Installer script downloaded! Please run it in Terminal to install HP Py Sleep.');
-            `;
-            document.head.appendChild(script);
-            document.head.removeChild(script);
+        function downloadInstaller() {
+            // Simple download function - the link now handles this automatically
+            const button = document.querySelector('.install-button');
+            const originalText = button.textContent;
+            button.textContent = '✅ Downloaded!';
+            button.style.background = '#28a745';
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
+            }, 3000);
         }
         
         function copyCommand() {
