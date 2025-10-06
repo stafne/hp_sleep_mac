@@ -204,10 +204,11 @@
     
     <script>
         function downloadInstaller() {
-            // Create a download link for the installer script
+            // Create a direct download link for the installer script
             const link = document.createElement('a');
             link.href = 'https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh';
             link.download = 'install_hp_py_sleep_simple.sh';
+            link.target = '_blank';
             link.style.display = 'none';
             document.body.appendChild(link);
             link.click();
