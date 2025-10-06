@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HP Py Sleep - Install</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .install-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 20px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+        
+        .install-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(46, 204, 113, 0.4);
+        }
+        
+        .command-box {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            text-align: left;
+        }
+        
+        .copy-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        .copy-button:hover {
+            background: #5a6268;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+        
+        .step {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #2196f3;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .instructions ol {
+            counter-reset: step-counter;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .warning h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        
+        .footer a {
+            color: #2196f3;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 HP Py Sleep</h1>
+        <p class="subtitle">Download & Install the Latest Version</p>
+        
+        <a href="javascript:void(0)" class="install-button" onclick="downloadInstaller()">
+            📱 Download Installer
+        </a>
+        
+        <div class="command-box">
+            <div>curl -s https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh | bash</div>
+            <button class="copy-button" onclick="copyCommand()">Copy Command</button>
+        </div>
+        
+        <div class="instructions">
+            <h3>📋 Installation Steps</h3>
+            <ol>
+                <li>Click "Download Installer" above to download the script</li>
+                <li>Open Terminal (Press Cmd+Space, type "Terminal", press Enter)</li>
+                <li>Navigate to Downloads: <code>cd ~/Downloads</code></li>
+                <li>Make executable: <code>chmod +x install_hp_py_sleep_simple.sh</code></li>
+                <li>Run installer: <code>./install_hp_py_sleep_simple.sh</code></li>
+            </ol>
+        </div>
+        
+        <div class="warning">
+            <h3>⚠️ Security Notice</h3>
+            <p>Since HP Py Sleep is not code-signed, macOS will show security warnings. This is normal and safe.</p>
+            <p><strong>To launch the app:</strong></p>
+            <ol>
+                <li>Right-click HP Py Sleep in Applications</li>
+                <li>Select "Open" from the context menu</li>
+                <li>Click "Open" when macOS shows the security dialog</li>
+            </ol>
+            <p><em>You only need to do this once per app.</em></p>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Repository:</strong> <a href="https://github.com/stafne/hp_sleep_mac">stafne/hp_sleep_mac</a></p>
+            <p><strong>Support:</strong> <a href="https://github.com/stafne/hp_sleep_mac/issues">GitHub Issues</a></p>
+        </div>
+    </div>
+    
+    <script>
+        function downloadInstaller() {
+            // Create a download link for the installer script
+            const link = document.createElement('a');
+            link.href = 'https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh';
+            link.download = 'install_hp_py_sleep_simple.sh';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show success message
+            const button = document.querySelector('.install-button');
+            const originalText = button.textContent;
+            button.textContent = '✅ Downloaded!';
+            button.style.background = '#28a745';
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'linear-gradient(135deg, #27ae60 0%, #2ecc71 100%)';
+            }, 3000);
+        }
+        
+        function copyCommand() {
+            const command = 'curl -s https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh | bash';
+            navigator.clipboard.writeText(command).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#28a745';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#6c757d';
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = command;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#28a745';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#6c757d';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

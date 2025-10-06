@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HP Py Sleep - Download & Install</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .install-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .install-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 20px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        .install-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(46, 204, 113, 0.4);
+        }
+        
+        .install-button:active {
+            transform: translateY(0);
+        }
+        
+        .one-liner {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+        
+        .copy-button {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .copy-button:hover {
+            background: #5a6268;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .feature-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .feature h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .feature p {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .instructions h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+        
+        .step {
+            margin: 10px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .step::before {
+            content: counter(step-counter);
+            counter-increment: step-counter;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #2196f3;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .instructions ol {
+            counter-reset: step-counter;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .warning h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #6c757d;
+        }
+        
+        .footer a {
+            color: #2196f3;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .system-requirements {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .system-requirements h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .requirement {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+        }
+        
+        .requirement-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header, .content {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 HP Py Sleep</h1>
+            <p class="subtitle">Download & Install the Latest Version</p>
+        </div>
+        
+        <div class="content">
+            <div class="install-section">
+                <h2>📥 Quick Install</h2>
+                <p>Click the button below to download and install HP Py Sleep automatically:</p>
+                
+                <button class="install-button" onclick="runInstaller()">
+                    📱 Install HP Py Sleep
+                </button>
+                
+                <div class="one-liner">
+                    <code id="install-command">curl -s https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh | bash</code>
+                    <button class="copy-button" onclick="copyCommand()">Copy</button>
+                </div>
+                
+                <p><small>Or copy the command above and run it in Terminal</small></p>
+            </div>
+            
+            <div class="system-requirements">
+                <h3>💻 System Requirements</h3>
+                <div class="requirement">
+                    <span class="requirement-icon">🍎</span>
+                    <span>macOS 10.15 or later</span>
+                </div>
+                <div class="requirement">
+                    <span class="requirement-icon">🌐</span>
+                    <span>Internet connection</span>
+                </div>
+                <div class="requirement">
+                    <span class="requirement-icon">⚡</span>
+                    <span>No additional software required</span>
+                </div>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Auto-Detection</h3>
+                    <p>Automatically finds and downloads the latest version</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📦</div>
+                    <h3>Smart Install</h3>
+                    <p>Installs directly to your Applications folder</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Dependency Free</h3>
+                    <p>Uses only built-in macOS tools</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Auto-Updates</h3>
+                    <p>Built-in updater for future versions</p>
+                </div>
+            </div>
+            
+            <div class="instructions">
+                <h3>📋 What Happens When You Install</h3>
+                <ol>
+                    <li>Downloads the latest HP Py Sleep release from GitHub</li>
+                    <li>Extracts the application to a temporary location</li>
+                    <li>Copies the app to your Applications folder</li>
+                    <li>Provides instructions for launching (security bypass)</li>
+                    <li>Optionally launches the app immediately</li>
+                </ol>
+            </div>
+            
+            <div class="warning">
+                <h3>⚠️ Important: Security Notice</h3>
+                <p>Since HP Py Sleep is not code-signed, macOS will show security warnings. This is normal and safe.</p>
+                <p><strong>To launch the app:</strong></p>
+                <ol>
+                    <li>Right-click HP Py Sleep in Applications</li>
+                    <li>Select "Open" from the context menu</li>
+                    <li>Click "Open" when macOS shows the security dialog</li>
+                </ol>
+                <p><em>You only need to do this once per app.</em></p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Repository:</strong> <a href="https://github.com/stafne/hp_sleep_mac">stafne/hp_sleep_mac</a></p>
+            <p><strong>Support:</strong> <a href="https://github.com/stafne/hp_sleep_mac/issues">GitHub Issues</a></p>
+            <p><strong>Releases:</strong> <a href="https://github.com/stafne/hp_sleep_mac/releases">View All Releases</a></p>
+        </div>
+    </div>
+    
+    <script>
+        function runInstaller() {
+            // Create a temporary script element to run the installer
+            const script = document.createElement('script');
+            script.textContent = `
+                // This will be executed in the browser context
+                // We'll redirect to a data URL that contains the installer
+                const installerUrl = 'data:text/plain;base64,' + btoa(\`
+#!/bin/bash
+# HP Py Sleep Installer - Downloaded from GitHub Pages
+# This script will download and install the latest HP Py Sleep release
+
+echo "🚀 HP Py Sleep Installer"
+echo "========================="
+echo ""
+echo "This installer will download and install HP Py Sleep to your Applications folder."
+echo ""
+
+# Check if we're on macOS
+if [[ "\$OSTYPE" != "darwin"* ]]; then
+    echo "❌ This installer is designed for macOS only."
+    exit 1
+fi
+
+echo "📱 Detected macOS system"
+echo ""
+
+# Download and run the actual installer
+echo "📥 Downloading installer script..."
+if curl -s https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh | bash; then
+    echo ""
+    echo "✅ Installation completed successfully!"
+    echo "HP Py Sleep is now available in your Applications folder."
+else
+    echo ""
+    echo "❌ Installation failed. Please try again or contact support."
+fi
+\`);
+                
+                // Create a download link
+                const link = document.createElement('a');
+                link.href = installerUrl;
+                link.download = 'install_hp_py_sleep.sh';
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                alert('Installer script downloaded! Please run it in Terminal to install HP Py Sleep.');
+            `;
+            document.head.appendChild(script);
+            document.head.removeChild(script);
+        }
+        
+        function copyCommand() {
+            const command = document.getElementById('install-command').textContent;
+            navigator.clipboard.writeText(command).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#28a745';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#6c757d';
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = command;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#28a745';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#6c757d';
+                }, 2000);
+            });
+        }
+        
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const installButton = document.querySelector('.install-button');
+            
+            installButton.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            installButton.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
