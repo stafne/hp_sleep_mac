@@ -257,18 +257,18 @@
         <div class="content">
             <div class="install-section">
                 <h2>📥 Quick Install</h2>
-                <p>Click the button below to download HP Py Sleep:</p>
+                <p>Click the button below to download the installer script:</p>
                 
-                <button class="install-button" onclick="downloadDMG()">
-                    📱 Download HP Py Sleep
+                <button class="install-button" onclick="downloadInstaller()">
+                    📱 Download Installer
                 </button>
                 
                 <div class="one-liner">
-                    <code id="install-command">curl -L https://github.com/stafne/hp_sleep_mac/releases/latest/download/hp_py_sleep_mac.dmg</code>
+                    <code id="install-command">curl -s https://raw.githubusercontent.com/stafne/hp_sleep_mac/main/install_hp_py_sleep_simple.sh | bash</code>
                     <button class="copy-button" onclick="copyCommand()">Copy</button>
                 </div>
                 
-                <p><small>Or copy the command above to download via Terminal</small></p>
+                <p><small>Or copy the command above and run it in Terminal</small></p>
             </div>
             
             <div class="system-requirements">
@@ -313,11 +313,11 @@
             <div class="instructions">
                 <h3>📋 How to Install</h3>
                 <ol>
-                    <li>Click "Download HP Py Sleep" above to download the DMG file</li>
-                    <li>Double-click the downloaded DMG file to mount it</li>
-                    <li>Drag the HP Py Sleep app to your Applications folder</li>
-                    <li>Eject the DMG when installation is complete</li>
-                    <li>Launch HP Py Sleep from your Applications folder</li>
+                    <li>Click "Download Installer" above to download the script</li>
+                    <li>Open Terminal (Press Cmd+Space, type "Terminal", press Enter)</li>
+                    <li>Navigate to Downloads: <code>cd ~/Downloads</code></li>
+                    <li>Make executable: <code>chmod +x install_hp_py_sleep.sh</code></li>
+                    <li>Run installer: <code>./install_hp_py_sleep.sh</code></li>
                 </ol>
             </div>
             
