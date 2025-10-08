@@ -1,0 +1,33 @@
+{
+  "app_name": "HP Py Sleep",
+  "version": "1.0.0",
+  "created_by": "bundled_default_config",
+  "created_timestamp": "",
+  "window_geometry": "",
+  "selected_signals": [],
+  "event_types": {
+    "Start": "green",
+    "Stop": "red",
+    "Error": "orange"
+  },
+  "state_types": {
+    "Recording": "blue",
+    "Paused": "yellow",
+    "Processing": "purple"
+  },
+  "trace_assignments": {},
+  "saved_montages": [],
+  "last_montage_name": null,
+  "last_h5_path_var": "",
+  "auto_output": false,
+  "load_mode": "all",
+  "max_samples": "1000",
+  "autoscale": "resize",
+  "anti_alias": false,
+  "remove_dc": false,
+  "window_size": "5 min",
+  "use_icons": true,
+  "dark_mode": false,
+  "note": "This is the default configuration bundled with HP Py Sleep"
+}
+

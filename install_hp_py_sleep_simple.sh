@@ -271,6 +271,84 @@ echo ""
 echo -e "${GREEN}🎉 HP Py Sleep has been installed to: $APP_DESTINATION${NC}"
 echo ""
 
+# Setup default configuration file
+echo -e "${BLUE}⚙️  Setting up configuration...${NC}"
+
+CONFIG_DIR="$HOME/Library/Application Support/HP Py Sleep"
+CONFIG_FILE="$CONFIG_DIR/hp_processor_config.json"
+
+# Create config directory if it doesn't exist
+if [ ! -d "$CONFIG_DIR" ]; then
+    echo -e "${BLUE}📁 Creating Application Support directory...${NC}"
+    mkdir -p "$CONFIG_DIR"
+    echo -e "${GREEN}✅ Created: $CONFIG_DIR${NC}"
+fi
+
+# Check if config file already exists
+if [ -f "$CONFIG_FILE" ]; then
+    echo -e "${GREEN}✅ Configuration file already exists: $CONFIG_FILE${NC}"
+    echo -e "${BLUE}ℹ️  Preserving existing configuration${NC}"
+else
+    echo -e "${BLUE}📝 Creating default configuration file...${NC}"
+    
+    # Create default config file
+    cat > "$CONFIG_FILE" << 'EOF'
+{
+  "app_name": "HP Py Sleep",
+  "version": "1.0.0",
+  "created_by": "installer_script",
+  "created_timestamp": "",
+  "window_geometry": "",
+  "selected_signals": [],
+  "event_types": {
+    "Start": "green",
+    "Stop": "red",
+    "Error": "orange"
+  },
+  "state_types": {
+    "Recording": "blue",
+    "Paused": "yellow",
+    "Processing": "purple"
+  },
+  "trace_assignments": {},
+  "saved_montages": [],
+  "last_montage_name": null,
+  "last_h5_path_var": "",
+  "auto_output": false,
+  "load_mode": "all",
+  "max_samples": "1000",
+  "autoscale": "resize",
+  "anti_alias": false,
+  "remove_dc": false,
+  "window_size": "5 min",
+  "use_icons": true,
+  "dark_mode": false,
+  "note": "This configuration file was created by the HP Py Sleep installer script"
+}
+EOF
+    
+    # Update the created_timestamp
+    CURRENT_TIME=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
+    if command -v sed &> /dev/null; then
+        sed -i '' "s/\"created_timestamp\": \"\"/\"created_timestamp\": \"$CURRENT_TIME\"/" "$CONFIG_FILE"
+    fi
+    
+    echo -e "${GREEN}✅ Created default configuration: $CONFIG_FILE${NC}"
+    echo -e "${BLUE}ℹ️  Default event types: Start, Stop, Error${NC}"
+    echo -e "${BLUE}ℹ️  Default state types: Recording, Paused, Processing${NC}"
+    
+    # Also create the template file for future use
+    TEMPLATE_FILE="$CONFIG_DIR/default_config_template.json"
+    if [ ! -f "$TEMPLATE_FILE" ]; then
+        echo -e "${BLUE}📝 Creating config template for future resets...${NC}"
+        cp "$CONFIG_FILE" "$TEMPLATE_FILE"
+        echo -e "${GREEN}✅ Created template: $TEMPLATE_FILE${NC}"
+        echo -e "${BLUE}ℹ️  You can edit this template to customize default settings${NC}"
+    fi
+fi
+
+echo ""
+
 # Show security notice
 echo -e "${YELLOW}⚠️  IMPORTANT: Security Notice${NC}"
 echo ""
@@ -292,7 +370,7 @@ if [[ "$response" =~ ^[Yy]$ ]]; then
     echo -e "${BLUE}🚀 Launching HP Py Sleep...${NC}"
     open "$APP_DESTINATION"
     echo ""
-    echo -e "${YELLOW}If you see a security warning, right-click and select \"Open\".${NC}"
+    echo -e "${YELLOW}If you see a security warning, right-click the app and select 'Open'.${NC}"
 fi
 
 echo ""
