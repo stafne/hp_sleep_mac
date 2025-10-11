@@ -67,7 +67,10 @@ get_latest_release() {
     temp_file=$(mktemp)
     
     # Download with better error handling
-    if ! curl -s -L -o "$temp_file" "$api_url"; then
+    if ! curl -s -L \
+        -H "Accept: application/vnd.github+json" \
+        -H "User-Agent: hp-py-sleep-installer" \
+        -o "$temp_file" "$api_url"; then
         echo -e "${RED}❌ Failed to fetch release information${NC}"
         rm -f "$temp_file"
         exit 1
@@ -160,7 +163,7 @@ download_asset() {
     # Download the file
     local zip_path="${temp_dir}/${asset_name}"
     
-    if ! curl -L -o "$zip_path" "$download_url"; then
+    if ! curl -L --fail -o "$zip_path" "$download_url"; then
         echo -e "${RED}❌ Failed to download $asset_name${NC}"
         rm -rf "$temp_dir"
         exit 1
@@ -272,8 +275,10 @@ install_app_from_dmg_latest() {
         rm -f "$tmpdmg"
         return 1
     fi
-    local app_src="$mount_point/hp_py_sleep_mac.app"
-    if [[ ! -d "$app_src" ]]; then
+    # Find the first .app in the mounted volume (handles varied layouts)
+    local app_src
+    app_src=$(find "$mount_point" -maxdepth 2 -type d -name "*.app" | head -1)
+    if [[ -z "$app_src" || ! -d "$app_src" ]]; then
         echo -e "${YELLOW}⚠️  App not found in DMG; will try ZIP method${NC}"
         hdiutil detach "$mount_point" >/dev/null 2>&1 || true
         rm -f "$tmpdmg"
@@ -306,6 +311,22 @@ main() {
         echo -e "${GREEN}🎉 Installation completed successfully!${NC}"
         echo -e "${BLUE}HP Py Sleep is now available in your Applications folder.${NC}"
         exit 0
+    fi
+
+    # Try direct ZIP URL (no API/jq required)
+    local tmp_dir_direct
+    tmp_dir_direct=$(mktemp -d)
+    local zip_direct_url="https://github.com/${GITHUB_REPO}/releases/latest/download/hp_py_sleep_mac.zip"
+    local zip_direct_path="${tmp_dir_direct}/hp_py_sleep_mac.zip"
+    echo -e "${BLUE}📥 Downloading ZIP (direct)...${NC}"
+    if curl -L --fail -o "$zip_direct_path" "$zip_direct_url"; then
+        install_app_from_zip "$zip_direct_path"
+        echo -e "${GREEN}🎉 Installation completed successfully!${NC}"
+        echo -e "${BLUE}HP Py Sleep is now available in your Applications folder.${NC}"
+        exit 0
+    else
+        rm -rf "$tmp_dir_direct"
+        echo -e "${YELLOW}⚠️  Direct ZIP not available; falling back to GitHub API${NC}"
     fi
 
     # Fallback: ZIP via GitHub API
